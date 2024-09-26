@@ -8,11 +8,6 @@ type DynamicResourceContextValue = {
   fields: { name: string; type: string }[];
 }[];
 
-// type DynamicResourceContextValue = {
-//   dynamicResources: DynamicResources;
-//   triggerDynamicResourcesUpdate: () => void;
-// };
-
 export const DYNAMIC_RESOURCES_QUERY_KEY = "dynamic_resources";
 
 const DynamicResourceContext = createContext<DynamicResourceContextValue>([]);
@@ -24,29 +19,7 @@ export const DynamicResourceProvider = ({
 }) => {
   const [dynamicResources, setDynamicResources] =
     useState<DynamicResourceContextValue>([]);
-  // const [updateDynamicResources, setUpdateDynamicResources] = useState(false);
 
-  // const triggerDynamicResourcesUpdate = () => {
-  //   setUpdateDynamicResources((prev) => !prev);
-  // };
-
-  // const entities = await queryClient.fetchQuery({
-  //   queryKey: [DYNAMIC_RESOURCES_QUERY_KEY],
-  //   queryFn: async () => {
-  //     const { data } = await supabaseClient.from("entities").select(`
-  //         name,
-  //         fields:entities_fields (
-  //           field:field_id (
-  //             name,
-  //             field_type_id (
-  //               type
-  //             )
-  //           )
-  //         )
-  //       `);
-  //     return data;
-  //   },
-  // });
   const fetchDynamicResources = async () => {
     const { data } = await supabaseClient.from("entities").select(`
         name,
@@ -81,52 +54,6 @@ export const DynamicResourceProvider = ({
     }));
     setDynamicResources(newContextValue || []);
   }, [entities]);
-
-  // useEffect(() => {
-  //   const fetchDynamicResources = async () => {
-  //     // const { data: entities } = await supabaseClient.from("entities").select(`
-  //     //   name,
-  //     //   fields:entities_fields (
-  //     //     field:field_id (
-  //     //       name,
-  //     //       field_type_id (
-  //     //         type
-  //     //       )
-  //     //     )
-  //     //   )
-  //     //   `);
-
-  //     const entities = await queryClient.fetchQuery({
-  //       queryKey: [DYNAMIC_RESOURCES_QUERY_KEY],
-  //       queryFn: async () => {
-  //         const { data } = await supabaseClient.from("entities").select(`
-  //             name,
-  //             fields:entities_fields (
-  //               field:field_id (
-  //                 name,
-  //                 field_type_id (
-  //                   type
-  //                 )
-  //               )
-  //             )
-  //           `);
-  //         return data;
-  //       },
-  //     });
-
-  //     const newContextValue = entities?.map((entity) => ({
-  //       name: entity.name,
-  //       fields: entity.fields.map((f) => ({
-  //         name: f.field.name,
-  //         type: f.field.field_type_id.type,
-  //       })),
-  //     }));
-
-  //     setDynamicResources(newContextValue || []);
-  //   };
-
-  //   fetchDynamicResources();
-  // }, [updateDynamicResources]);
 
   return (
     <DynamicResourceContext.Provider value={dynamicResources || []}>
