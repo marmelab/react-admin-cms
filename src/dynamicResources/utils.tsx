@@ -13,7 +13,7 @@ export const getField = (fieldType: string, source: string) => {
   switch (fieldType) {
     case "text":
       return <TextField key={source} source={source} />;
-    case "number":
+    case "numeric":
       return <NumberField key={source} source={source} />;
     case "date":
       return <DateField key={source} source={source} />;
@@ -28,7 +28,7 @@ export const getInput = (fieldType: string, source: string) => {
   switch (fieldType) {
     case "text":
       return <TextInput key={source} source={source} />;
-    case "number":
+    case "numeric":
       return <NumberInput key={source} source={source} />;
     case "date":
       return <DateInput key={source} source={source} />;

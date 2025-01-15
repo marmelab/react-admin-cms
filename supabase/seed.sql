@@ -2,6 +2,6 @@ insert into
   field_types (type)
 values
   ('text'),
-  ('number'),
+  ('numeric'),
   ('date'),
   ('boolean');
