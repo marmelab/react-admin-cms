@@ -1,5 +1,5 @@
 insert into
-  fieldTypes (name)
+  field_types (type)
 values
   ('text'),
   ('number'),

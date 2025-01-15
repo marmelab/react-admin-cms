@@ -36,7 +36,7 @@ create table "public"."fields" (
 
 alter table "public"."fields" enable row level security;
 
-CREATE UNIQUE INDEX "entitiesFields_pkey" ON public.entities_fields USING btree (id);
+CREATE UNIQUE INDEX "entities_fields_pkey" ON public.entities_fields USING btree (id);
 
 CREATE UNIQUE INDEX entities_pkey ON public.entities USING btree (id);
 
@@ -46,19 +46,19 @@ CREATE UNIQUE INDEX field_type_pkey ON public.field_types USING btree (id);
 
 alter table "public"."entities" add constraint "entities_pkey" PRIMARY KEY using index "entities_pkey";
 
-alter table "public"."entities_fields" add constraint "entitiesFields_pkey" PRIMARY KEY using index "entitiesFields_pkey";
+alter table "public"."entities_fields" add constraint "entities_fields_pkey" PRIMARY KEY using index "entities_fields_pkey";
 
 alter table "public"."field_types" add constraint "field_type_pkey" PRIMARY KEY using index "field_type_pkey";
 
 alter table "public"."fields" add constraint "field_pkey" PRIMARY KEY using index "field_pkey";
 
-alter table "public"."entities_fields" add constraint "entitiesFields_entity_id_fkey" FOREIGN KEY (entity_id) REFERENCES entities(id) not valid;
+alter table "public"."entities_fields" add constraint "entities_fields_entity_id_fkey" FOREIGN KEY (entity_id) REFERENCES entities(id) not valid;
 
-alter table "public"."entities_fields" validate constraint "entitiesFields_entity_id_fkey";
+alter table "public"."entities_fields" validate constraint "entities_fields_entity_id_fkey";
 
-alter table "public"."entities_fields" add constraint "entitiesFields_field_id_fkey" FOREIGN KEY (field_id) REFERENCES fields(id) not valid;
+alter table "public"."entities_fields" add constraint "entities_fields_field_id_fkey" FOREIGN KEY (field_id) REFERENCES fields(id) not valid;
 
-alter table "public"."entities_fields" validate constraint "entitiesFields_field_id_fkey";
+alter table "public"."entities_fields" validate constraint "entities_fields_field_id_fkey";
 
 alter table "public"."fields" add constraint "field_field_type_id_fkey" FOREIGN KEY (field_type_id) REFERENCES field_types(id) not valid;
 
@@ -231,5 +231,3 @@ grant trigger on table "public"."fields" to "service_role";
 grant truncate on table "public"."fields" to "service_role";
 
 grant update on table "public"."fields" to "service_role";
-
-

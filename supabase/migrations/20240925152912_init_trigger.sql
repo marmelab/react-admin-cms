@@ -1,9 +1,3 @@
-alter table "public"."entities_fields" drop constraint "entitiesFields_entity_id_fkey";
-
-alter table "public"."entities_fields" add constraint "entities_fields_entity_id_fkey" FOREIGN KEY (entity_id) REFERENCES entities(id) ON DELETE CASCADE not valid;
-
-alter table "public"."entities_fields" validate constraint "entities_fields_entity_id_fkey";
-
 set check_function_bodies = off;
 
 CREATE OR REPLACE FUNCTION public.trigger_entities_fields_table()
@@ -14,11 +8,7 @@ AS $function$DECLARE
     entity_table_name TEXT;
     field_name TEXT;
     field_type TEXT;
-    new_field_type TEXT;
 BEGIN
-    -- Set the table name based on the entity
-    SELECT name INTO entity_table_name FROM entities WHERE id = NEW.entity_id;
-
     -- Handle DELETE: Remove field from the entity's table
     IF TG_OP = 'DELETE' THEN
         -- Set the table name based on the entity
