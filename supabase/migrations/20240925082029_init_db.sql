@@ -52,15 +52,15 @@ alter table "public"."field_types" add constraint "field_type_pkey" PRIMARY KEY 
 
 alter table "public"."fields" add constraint "field_pkey" PRIMARY KEY using index "field_pkey";
 
-alter table "public"."entities_fields" add constraint "entities_fields_entity_id_fkey" FOREIGN KEY (entity_id) REFERENCES entities(id) not valid;
+alter table "public"."entities_fields" add constraint "entities_fields_entity_id_fkey" FOREIGN KEY (entity_id) REFERENCES entities(id) on delete cascade not valid;
 
 alter table "public"."entities_fields" validate constraint "entities_fields_entity_id_fkey";
 
-alter table "public"."entities_fields" add constraint "entities_fields_field_id_fkey" FOREIGN KEY (field_id) REFERENCES fields(id) not valid;
+alter table "public"."entities_fields" add constraint "entities_fields_field_id_fkey" FOREIGN KEY (field_id) REFERENCES fields(id) on delete cascade not valid;
 
 alter table "public"."entities_fields" validate constraint "entities_fields_field_id_fkey";
 
-alter table "public"."fields" add constraint "field_field_type_id_fkey" FOREIGN KEY (field_type_id) REFERENCES field_types(id) not valid;
+alter table "public"."fields" add constraint "field_field_type_id_fkey" FOREIGN KEY (field_type_id) REFERENCES field_types(id) on delete cascade not valid;
 
 alter table "public"."fields" validate constraint "field_field_type_id_fkey";
 
