@@ -11,10 +11,10 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@react-admin/ra-relationships": "^5.0.1",
-    "ra-supabase": "^3.2.0",
+    "@react-admin/ra-relationships": "^5.2.0",
+    "ra-supabase": "^3.3.1",
     "react": "^18.3.0",
-    "react-admin": "^5.1.0",
+    "react-admin": "^5.4.4",
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
